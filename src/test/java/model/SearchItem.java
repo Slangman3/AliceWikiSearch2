@@ -15,5 +15,5 @@ public class SearchItem {
         this.searchString = searchString;
     }
 
-    
+
 }
