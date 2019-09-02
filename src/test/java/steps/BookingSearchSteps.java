@@ -7,11 +7,15 @@ import cucumber.api.java.en.When;
 import model.SearchItem;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.BookingMainPage;
+import pages.BookingSearchPage;
 
 public class BookingSearchSteps {
-    private BookingSearchPage page;
+    private BookingSearchPage searchPage;
     private WebDriver driver;
     private String searchString;
+    private SearchItem searchItem;
+    private BookingMainPage bookingMainPage;
     private static final String Booking_URL = "https://www.booking.com/index.ru.html";
 
     @cucumber.api.java.en.Given("Input keyword for searching {string}")
@@ -24,9 +28,9 @@ public class BookingSearchSteps {
     public void search() {
         driver = new ChromeDriver();
         driver.get(Booking_URL);
-        BookingMainPage = new BookingMainPage(driver);
-        bookingStartPage.searchByKeyword(inputHotelName.sendKeys());
-        searchPage = new WikiSearchPage(driver);
+        bookingMainPage = new BookingMainPage(driver);
+        bookingMainPage.searchByKeyword(searchItem.getSearchString());
+        searchPage = new BookingSearchPage(driver);
     }
     
     @Given("I want to search for {string}")
@@ -39,7 +43,7 @@ public class BookingSearchSteps {
 
     @When("I do search")
     public void iDoSearch() {
-        page.inputHotelName(searchString);
+        searchPage.inputHotelName(searchString);
         page.clickSearch();
     }
 
