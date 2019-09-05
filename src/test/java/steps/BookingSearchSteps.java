@@ -36,9 +36,10 @@ public class BookingSearchSteps {
         searchPage.resultPageShouldContainHotel(hotelsResult);
     }
 
-    @cucumber.api.java.en.And("{}rating should be {string}")
-    public void ratingShouldBe(String hotelResult, String ratingResult) {
-        searchPage.hotelShouldBeRated(hotelResult, ratingResult);
+    @cucumber.api.java.en.And("rating should be {string}")
+    public void ratingShouldBe(String ratingResult) {
+        String hotelName = searchItem;
+        searchPage.hotelShouldBeRated(hotelName, ratingResult);
         driver.quit();
     }
 }
