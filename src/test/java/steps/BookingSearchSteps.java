@@ -16,7 +16,7 @@ public class BookingSearchSteps {
 
     @cucumber.api.java.en.Given("Input keyword for searching {string}")
     public void searchKeywordIsString(String keyword) {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/home/circleci/repo/src/test/resources/webdrivers/chromedriver.exe");
         searchItem = keyword;
     }
 
