@@ -4,4 +4,4 @@ Feature: Booking.com search
     Given Input keyword for searching "Hilton"
     When User does search on Booking
     Then Booking shows "Hilton Sharm Waterfalls Resort"
-    And  rating should be "7,0"
+    And  rating should be "7,1"
