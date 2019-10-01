@@ -24,6 +24,9 @@ jobs:
 
       # run tests!
       - run:
+          name: set chmode
+          command: chmod 777 src/test/resources/webdrivers/linux/chromedriver
+      - run:
           name: Running tests
           command: mvn clean install
       - run:
