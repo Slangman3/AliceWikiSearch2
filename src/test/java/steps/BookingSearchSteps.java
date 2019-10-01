@@ -1,42 +1,45 @@
 package steps;
 
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.BookingMainPage;
+import pages.BookingSearchPage;
+import utils.CapabilitiesGenerator;
+
+import java.util.concurrent.TimeUnit;
 
 public class BookingSearchSteps {
-   /* BookingSearchPage page;
-    WebDriver driver;
-    String searchString;
-    
-    @Given("I want to search for {string}")
-    public void iWantToSearchFor(String hotelName) {
-        searchString = hotelName;
-        driver = ChromeDriver();
-        page = new BookingSearchPage(driver);
+    private BookingSearchPage searchPage;
+    private WebDriver driver;
+    private String searchItem;
+    private BookingMainPage bookingMainPage;
+    private static final String Booking_URL = "https://www.booking.com/index.ru.html";
+
+    @cucumber.api.java.en.Given("Input keyword for searching {string}")
+    public void searchKeywordIsString(String keyword) {
+        searchItem = keyword;
     }
 
-    @When("I do search")
-    public void iDoSearch() {
-        page.inputHotelName(searchString);
-        page.clickSearch();
+    @cucumber.api.java.en.When("User does search on Booking")
+    public void search() {
+        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
+        driver.get(Booking_URL);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        bookingMainPage = new BookingMainPage(driver);
+        bookingMainPage.searchByKeyword(searchItem);
+        searchPage = new BookingSearchPage(driver);
     }
 
-    @Then("Results page should contain {string}")
-    public void resultsPageShouldContain(String arg0) {
-        BookingResultsPage page = new BookingResultsPage(driver);
-        page.isPageOpened();
-        List<String> hotels = page.getResults();
-        assertThat(horels, contains(arg0));
+    @cucumber.api.java.en.Then("Booking shows {string}")
+    public void bookingShows(String hotelsResult) {
+        searchPage.resultPageShouldContainHotel(hotelsResult);
     }
 
-    @And("rating should be {string}")
-    public void ratingShouldBe(String arg0) {
-
-        BookingResultsPage page = new BookingResultsPage(driver);
-        String rating = page.getRatingFor(hotelName);
-        assertEquals(rating, arg0)
-    }*/
+    @cucumber.api.java.en.And("rating should be {string}")
+    public void ratingShouldBe(String ratingResult) {
+        String hotelName = searchItem;
+        searchPage.hotelShouldBeRated(hotelName, ratingResult);
+        driver.quit();
+    }
 }
