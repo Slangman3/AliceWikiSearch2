@@ -20,7 +20,6 @@ public class BookingSearchSteps {
     @cucumber.api.java.en.Given("Input keyword for searching {string}")
     public void searchKeywordIsString(String keyword) {
         searchItem = keyword;
-        AllureUtils.takeScreenshot(driver);
     }
 
     @cucumber.api.java.en.When("User does search on Booking")
@@ -28,6 +27,7 @@ public class BookingSearchSteps {
     public void search() {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.get(Booking_URL);
+        AllureUtils.takeScreenshot(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         bookingMainPage = new BookingMainPage(driver);

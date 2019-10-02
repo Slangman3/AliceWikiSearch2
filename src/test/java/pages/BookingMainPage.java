@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.AllureUtils;
 
 public class BookingMainPage extends BasePage {
 
@@ -18,6 +19,7 @@ public class BookingMainPage extends BasePage {
 
     public void searchByKeyword(String keyword) {
         searchField.sendKeys(keyword);
+        AllureUtils.takeScreenshot(driver);
         searchButton.click();
     }
 
