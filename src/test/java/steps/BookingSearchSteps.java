@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.BookingMainPage;
 import pages.BookingSearchPage;
+import utils.AllureUtils;
 import utils.CapabilitiesGenerator;
 
 import java.util.concurrent.TimeUnit;
@@ -17,13 +18,13 @@ public class BookingSearchSteps {
     private static final String Booking_URL = "https://www.booking.com/index.ru.html";
 
     @cucumber.api.java.en.Given("Input keyword for searching {string}")
-    @Step("Ввод ключевого слова {string} в строку поиска")
     public void searchKeywordIsString(String keyword) {
         searchItem = keyword;
+        AllureUtils.takeScreenshot(driver);
     }
 
     @cucumber.api.java.en.When("User does search on Booking")
-    @Step("Заходим на сайт Букинга")
+    @Step("Пользователь ищет отель {searchItem} на сайте booking.com")
     public void search() {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.get(Booking_URL);
@@ -32,19 +33,22 @@ public class BookingSearchSteps {
         bookingMainPage = new BookingMainPage(driver);
         bookingMainPage.searchByKeyword(searchItem);
         searchPage = new BookingSearchPage(driver);
+        AllureUtils.takeScreenshot(driver);
     }
 
     @cucumber.api.java.en.Then("Booking shows {string}")
-    @Step("Загрузка страницы результата поиска")
+    @Step("Проверка на наличие данного отеля в списке")
     public void bookingShows(String hotelsResult) {
         searchPage.resultPageShouldContainHotel(hotelsResult);
+        AllureUtils.takeScreenshot(driver);
     }
 
     @cucumber.api.java.en.And("rating should be {string}")
-    @Step("Проверка наличия отеля и его рейтинга {string}")
+    @Step("Проверка на соответствие рейтинга отеля, равное: {string}")
     public void ratingShouldBe(String ratingResult) {
         String hotelName = searchItem;
         searchPage.hotelShouldBeRated(hotelName, ratingResult);
         driver.quit();
+        AllureUtils.takeScreenshot(driver);
     }
 }
