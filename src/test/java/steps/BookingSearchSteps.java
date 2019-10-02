@@ -44,7 +44,7 @@ public class BookingSearchSteps {
     }
 
     @cucumber.api.java.en.And("rating should be {string}")
-    @Step("Проверка на соответствие рейтинга отеля, равное: {string}")
+    @Step("Проверка на соответствие рейтинга отеля, равное: {ratingResult}")
     public void ratingShouldBe(String ratingResult) {
         String hotelName = searchItem;
         searchPage.hotelShouldBeRated(hotelName, ratingResult);
