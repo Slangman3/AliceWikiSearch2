@@ -23,7 +23,7 @@ public class BookingSearchSteps {
     }
 
     @cucumber.api.java.en.When("User does search on Booking")
-    @Step("Пользователь ищет отель {searchItem} на сайте booking.com")
+    @Step("Пользователь ищет отель на сайте booking.com")
     public void search() {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.get(Booking_URL);
@@ -44,7 +44,7 @@ public class BookingSearchSteps {
     }
 
     @cucumber.api.java.en.And("rating should be {string}")
-    @Step("Проверка на соответствие рейтинга отеля, равное: {ratingResult}")
+    @Step("Проверка на соответствие рейтинга отеля")
     public void ratingShouldBe(String ratingResult) {
         String hotelName = searchItem;
         searchPage.hotelShouldBeRated(hotelName, ratingResult);

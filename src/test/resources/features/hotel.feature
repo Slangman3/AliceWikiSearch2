@@ -1,7 +1,7 @@
 Feature: Booking.com search
 
   Scenario: Searching Hilton on Booking.com
-    Given Input keyword for searching "Hilton"
+    Given Input keyword for searching "Юбилейный"
     When User does search on Booking
-    Then Booking shows "Hilton Sharm Waterfalls Resort"
-    And  rating should be "7,1"
+    Then Booking shows "Отель Юбилейный"
+    And  rating should be "8,3"
