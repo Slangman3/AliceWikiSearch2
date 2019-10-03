@@ -32,14 +32,15 @@ public class BookingSearchSteps {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         bookingMainPage = new BookingMainPage(driver);
         bookingMainPage.searchByKeyword(searchItem);
-        searchPage = new BookingSearchPage(driver);
+
         AllureUtils.takeScreenshot(driver);
     }
 
     @cucumber.api.java.en.Then("Booking shows {string}")
     @Step("Проверка на наличие данного отеля в списке")
-    public void bookingShows(String hotelsResult) {
-        searchPage.resultPageShouldContainHotel(hotelsResult);
+    public void bookingShows(String keyword) {
+        searchPage = new BookingSearchPage(driver);
+        searchPage.resultPageShouldContainHotel(keyword);
         AllureUtils.takeScreenshot(driver);
     }
 
